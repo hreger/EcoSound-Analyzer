@@ -1,6 +1,6 @@
 // js/main.js - Core application logic and event handlers
 
-import { processAudioFile, toggleRecording, showStatus, submitFeedback } from './audio-processor.js';
+import { processAudioFile, toggleRecording, submitFeedback, showStatus } from './audio-processor.js';
 import { initializeMap, toggleLayer, toggleUncertainty } from './map-handler.js';
 
 // Global variables

@@ -79,7 +79,7 @@
     </div>
 
     <!-- Consent Popup -->
-    <div class="consent-popup" id="consentPopup">
+    <div class="consent-popup" id="consentPopup" style="display: none;">
         <div class="consent-content">
             <h3>🔒 Privacy & Data Consent</h3>
             <p>EcoSound Analyzer processes only anonymized audio features (MFCC) and approximate geolocation for noise pollution research. We don't store raw audio files.</p>
@@ -96,9 +96,10 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/yamnet/dist/yamnet.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/meyda/5.3.0/meyda.min.js"></script>
     
-    <script type="module" src="js/audio-processor.js"></script>
-    <script type="module" src="js/ml-models.js"></script>
+    <!-- Module Scripts -->
     <script type="module" src="js/map-handler.js"></script>
+    <script type="module" src="js/ml-models.js"></script>
+    <script type="module" src="js/audio-processor.js"></script>
     <script type="module" src="js/main.js"></script>
 </body>
 </html>

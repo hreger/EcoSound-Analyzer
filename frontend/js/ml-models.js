@@ -18,7 +18,7 @@ const WHO_STANDARDS = {
 };
 
 // YAMNet audio classification
-export async function classifyAudioYAMNet(audioBlob) {
+export async function classifyAudioYAMNet(audioFile) {
     try {
         // Load YAMNet model if not already loaded
         if (!window.yamnetModel) {
@@ -27,10 +27,10 @@ export async function classifyAudioYAMNet(audioBlob) {
             console.log('YAMNet model loaded successfully');
         }
 
-        // Convert audio blob to audio buffer
+        // Convert file to audio buffer
+        const arrayBuffer = await audioFile.arrayBuffer();
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const buffer = await audioBlob.arrayBuffer();
-        const audioBuffer = await audioContext.decodeAudioData(buffer);
+        const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
         const waveform = audioBuffer.getChannelData(0);
 
         // Classify audio using YAMNet
@@ -82,7 +82,7 @@ function mapYAMNetToSoundClasses(yamnetResults) {
     // Convert to array and sort by confidence
     const results = Object.entries(mappedResults).map(([name, confidence]) => ({
         name,
-        confidence: Math.min(confidence, 1.0), // Ensure confidence doesn't exceed 1
+        confidence: Math.min(confidence, 1.0),
         class: name.toLowerCase()
     }));
     
@@ -94,7 +94,7 @@ function mapYAMNetToSoundClasses(yamnetResults) {
 function generateMockClassification() {
     const results = Object.keys(SOUND_CLASSES).map(className => ({
         name: className,
-        confidence: Math.random() * 0.8 + 0.2, // Random confidence between 0.2 and 1.0
+        confidence: Math.random() * 0.8 + 0.2,
         class: className.toLowerCase()
     }));
     
@@ -146,46 +146,4 @@ function getWHOStatus(noiseLevel) {
     } else {
         return { status: 'Within Safe Limits', color: '#27ae60' };
     }
-}
-
-// Enhanced anomaly detection
-export function detectAnomalies(features) {
-    const avgEnergy = features.reduce((sum, f) => sum + f.energy, 0) / features.length;
-    const avgZCR = features.reduce((sum, f) => sum + f.zcr, 0) / features.length;
-    
-    // Detect high energy anomalies (emergency vehicles, alarms)
-    if (avgEnergy > 0.7) {
-        return { detected: true, type: 'High Energy Anomaly (possible emergency vehicle or alarm)' };
-    }
-    
-    // Detect unusual spectral characteristics
-    if (avgZCR > 0.3) {
-        return { detected: true, type: 'Unusual Spectral Pattern (possible construction/industrial activity)' };
-    }
-    
-    return { detected: false, type: null };
-}
-
-// Noise level prediction (simplified demo)
-export function predictNoiseLevel(currentLevel, timeOfDay, weather = 'clear') {
-    let prediction = currentLevel;
-    
-    // Time-based adjustments
-    const hour = new Date().getHours();
-    if (hour >= 6 && hour <= 9) { // Morning rush
-        prediction += 5;
-    } else if (hour >= 17 && hour <= 19) { // Evening rush
-        prediction += 3;
-    } else if (hour >= 22 || hour <= 6) { // Night
-        prediction -= 8;
-    }
-    
-    // Weather adjustments
-    if (weather === 'rain') {
-        prediction -= 3; // Rain dampens traffic noise
-    } else if (weather === 'wind') {
-        prediction += 2; // Wind can increase background noise
-    }
-    
-    return Math.max(30, Math.min(100, Math.round(prediction)));
 }
