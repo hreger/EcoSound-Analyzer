@@ -42,8 +42,8 @@ ecosound-analyzer/
 This is a research-grade web application for real-time urban noise pollution monitoring using AI-powered sound classification and interactive mapping. The system processes audio through machine learning models, provides WHO compliance assessment, and visualizes noise pollution patterns on an interactive map.
 
 ## Screenshots
-![Priliminary Screenshot](image.png)
-
+![Priliminary Screenshot](home_page.png)
+![Recording Details Screenshot](recording_details.png)
 
 ## Setup Instructions
 Place all files according to the directory structure above
