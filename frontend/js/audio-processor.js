@@ -51,11 +51,14 @@ export async function processAudioFile(file) {
 // Add analysis result to map
 function addAnalysisToMap(classification) {
     if (!navigator.geolocation) {
-        // Use default location with some randomness
-        const lat = 40.7128 + (Math.random() - 0.5) * 0.1;
-        const lng = -74.0060 + (Math.random() - 0.5) * 0.1;
+            // Set VIT Vellore coordinates exactly
+        const vitVelloreLat = 12.9716;  // latitude for VIT Vellore
+        const vitVelloreLng = 79.1581;  // longitude for VIT Vellore
+
         const noiseLevel = Math.round(45 + (classification[0].confidence * 40));
-        addNoiseMarker(lat, lng, noiseLevel, classification[0].confidence);
+        
+        // Use fixed VIT Vellore coordinates instead of geolocation
+        addNoiseMarker(vitVelloreLat, vitVelloreLng, noiseLevel, classification[0].confidence);
         return;
     }
     
@@ -66,8 +69,8 @@ function addAnalysisToMap(classification) {
         addNoiseMarker(lat, lng, noiseLevel, classification[0].confidence);
     }, () => {
         // Fallback to simulated location
-        const lat = 40.7128 + (Math.random() - 0.5) * 0.1;
-        const lng = -74.0060 + (Math.random() - 0.5) * 0.1;
+        const lat = 12.9716 + (Math.random() - 0.5) * 0.1;
+        const lng = 79.1581 + (Math.random() - 0.5) * 0.1;
         const noiseLevel = Math.round(45 + (classification[0].confidence * 40));
         addNoiseMarker(lat, lng, noiseLevel, classification[0].confidence);
     });

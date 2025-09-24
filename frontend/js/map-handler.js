@@ -10,15 +10,15 @@ let uncertaintyLayer = null;
 // Initialize Leaflet map with heat layers
 export function initializeMap() {
     try {
-        // Create map centered on New York City (default)
-        map = L.map('map').setView([40.7128, -74.0060], 11);
-        
+        // Create map centered on Bangalore, India
+        map = L.map('map').setView([12.9716, 77.5946], 12);
+
         // Add OpenStreetMap tile layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors | EcoSound Analyzer',
             maxZoom: 19
         }).addTo(map);
-        
+
         // Initialize heat layers for different sound sources
         heatLayers = {
             traffic: L.heatLayer([], { 
@@ -42,13 +42,13 @@ export function initializeMap() {
                 gradient: {0.0: '#2ecc71', 0.5: '#27ae60', 1.0: '#16a085'}
             }).addTo(map)
         };
-        
-        // Add sample noise pollution data
+
+        // Add sample noise pollution data in Bangalore
         addSampleMarkers();
-        
+
         // Store map reference globally for other modules
         window.map = map;
-        
+
         console.log('Map initialized successfully');
         
     } catch (error) {
@@ -57,20 +57,20 @@ export function initializeMap() {
     }
 }
 
-// Add sample markers with realistic data
+// Add sample markers with realistic data around Bangalore
 function addSampleMarkers() {
     const sampleData = [
-        { lat: 40.7589, lng: -73.9851, noise: 78, type: 'traffic', confidence: 0.92 },
-        { lat: 40.7505, lng: -73.9934, noise: 85, type: 'construction', confidence: 0.87 },
-        { lat: 40.7282, lng: -73.9942, noise: 42, type: 'nature', confidence: 0.94 },
-        { lat: 40.7411, lng: -73.9897, noise: 82, type: 'traffic', confidence: 0.89 },
-        { lat: 40.7614, lng: -73.9776, noise: 58, type: 'human', confidence: 0.76 },
-        { lat: 40.7390, lng: -73.9889, noise: 88, type: 'industrial', confidence: 0.91 },
-        { lat: 40.7449, lng: -73.9865, noise: 52, type: 'nature', confidence: 0.83 },
-        { lat: 40.7547, lng: -73.9840, noise: 73, type: 'traffic', confidence: 0.85 },
-        { lat: 40.7318, lng: -73.9918, noise: 67, type: 'human', confidence: 0.78 }
+        { lat: 12.9716, lng: 77.5946, noise: 78, type: 'traffic', confidence: 0.92 },
+        { lat: 12.9735, lng: 77.6011, noise: 85, type: 'construction', confidence: 0.87 },
+        { lat: 12.9694, lng: 77.5990, noise: 42, type: 'nature', confidence: 0.94 },
+        { lat: 12.9790, lng: 77.5920, noise: 82, type: 'traffic', confidence: 0.89 },
+        { lat: 12.9650, lng: 77.5850, noise: 58, type: 'human', confidence: 0.76 },
+        { lat: 12.9742, lng: 77.5954, noise: 88, type: 'industrial', confidence: 0.91 },
+        { lat: 12.9774, lng: 77.5900, noise: 52, type: 'nature', confidence: 0.83 },
+        { lat: 12.9700, lng: 77.6000, noise: 73, type: 'traffic', confidence: 0.85 },
+        { lat: 12.9682, lng: 77.5908, noise: 67, type: 'human', confidence: 0.78 }
     ];
-    
+
     sampleData.forEach(point => {
         const color = getNoiseColor(point.noise);
         const radius = Math.max(8, point.noise / 8);
@@ -84,7 +84,6 @@ function addSampleMarkers() {
             fillOpacity: point.confidence * 0.8
         }).addTo(map);
         
-        // Enhanced popup with WHO compliance
         marker.bindPopup(`
             <div style="min-width: 200px;">
                 <strong>🔊 ${point.noise} dB</strong><br>
@@ -95,7 +94,6 @@ function addSampleMarkers() {
             </div>
         `);
         
-        // Add to appropriate heat layer
         if (heatLayers[point.type]) {
             heatLayers[point.type].addLatLng([point.lat, point.lng, point.noise / 100]);
         }
