@@ -1,0 +1,194 @@
+[
+  {
+    "id": 1,
+    "location": {
+      "latitude": 40.7589,
+      "longitude": -73.9851,
+      "area": "Times Square, NYC"
+    },
+    "timestamp": "2025-09-24T09:30:00Z",
+    "noise_level": 78.5,
+    "dominant_source": "traffic",
+    "classification": {
+      "traffic": 0.85,
+      "human": 0.10,
+      "construction": 0.03,
+      "other": 0.02
+    },
+    "who_compliance": {
+      "status": "Exceeds WHO Daytime Limit",
+      "exceeds_limit": true
+    },
+    "weather": "clear",
+    "confidence": 0.92
+  },
+  {
+    "id": 2,
+    "location": {
+      "latitude": 40.7505,
+      "longitude": -73.9934,
+      "area": "Construction Zone, NYC"
+    },
+    "timestamp": "2025-09-24T10:15:00Z",
+    "noise_level": 85.2,
+    "dominant_source": "construction",
+    "classification": {
+      "construction": 0.89,
+      "industrial": 0.08,
+      "traffic": 0.02,
+      "other": 0.01
+    },
+    "who_compliance": {
+      "status": "Critical - Health Risk",
+      "exceeds_limit": true
+    },
+    "weather": "clear",
+    "confidence": 0.87,
+    "anomaly": {
+      "detected": true,
+      "type": "loud_machinery",
+      "severity": "high"
+    }
+  },
+  {
+    "id": 3,
+    "location": {
+      "latitude": 40.7282,
+      "longitude": -73.9942,
+      "area": "Central Park, NYC"
+    },
+    "timestamp": "2025-09-24T08:45:00Z",
+    "noise_level": 42.1,
+    "dominant_source": "nature",
+    "classification": {
+      "nature": 0.78,
+      "human": 0.15,
+      "traffic": 0.05,
+      "other": 0.02
+    },
+    "who_compliance": {
+      "status": "Within Safe Limits",
+      "exceeds_limit": false
+    },
+    "weather": "light_rain",
+    "confidence": 0.94
+  },
+  {
+    "id": 4,
+    "location": {
+      "latitude": 40.7411,
+      "longitude": -73.9897,
+      "area": "Penn Station Area, NYC"
+    },
+    "timestamp": "2025-09-24T17:30:00Z",
+    "noise_level": 82.0,
+    "dominant_source": "traffic",
+    "classification": {
+      "traffic": 0.76,
+      "human": 0.18,
+      "industrial": 0.04,
+      "other": 0.02
+    },
+    "who_compliance": {
+      "status": "Critical - Health Risk",
+      "exceeds_limit": true
+    },
+    "weather": "clear",
+    "confidence": 0.89
+  },
+  {
+    "id": 5,
+    "location": {
+      "latitude": 40.7614,
+      "longitude": -73.9776,
+      "area": "Residential Area, NYC"
+    },
+    "timestamp": "2025-09-24T22:00:00Z",
+    "noise_level": 58.3,
+    "dominant_source": "human",
+    "classification": {
+      "human": 0.65,
+      "traffic": 0.25,
+      "other": 0.10
+    },
+    "who_compliance": {
+      "status": "Exceeds WHO Daytime Limit",
+      "exceeds_limit": true
+    },
+    "weather": "clear",
+    "confidence": 0.76
+  },
+  {
+    "id": 6,
+    "location": {
+      "latitude": 40.7390,
+      "longitude": -73.9889,
+      "area": "Industrial District, NYC"
+    },
+    "timestamp": "2025-09-24T14:20:00Z",
+    "noise_level": 88.7,
+    "dominant_source": "industrial",
+    "classification": {
+      "industrial": 0.91,
+      "construction": 0.06,
+      "traffic": 0.02,
+      "other": 0.01
+    },
+    "who_compliance": {
+      "status": "Critical - Health Risk",
+      "exceeds_limit": true
+    },
+    "weather": "wind",
+    "confidence": 0.91,
+    "anomaly": {
+      "detected": true,
+      "type": "high_energy_event",
+      "severity": "critical"
+    }
+  },
+  {
+    "id": 7,
+    "location": {
+      "latitude": 40.7547,
+      "longitude": -73.9840,
+      "area": "Theater District, NYC"
+    },
+    "timestamp": "2025-09-24T20:15:00Z",
+    "noise_level": 73.4,
+    "dominant_source": "human",
+    "classification": {
+      "human": 0.72,
+      "traffic": 0.20,
+      "other": 0.08
+    },
+    "who_compliance": {
+      "status": "Critical - Health Risk",
+      "exceeds_limit": true
+    },
+    "weather": "clear",
+    "confidence": 0.85
+  },
+  {
+    "id": 8,
+    "location": {
+      "latitude": 40.7318,
+      "longitude": -73.9918,
+      "area": "Greenwich Village, NYC"
+    },
+    "timestamp": "2025-09-24T11:00:00Z",
+    "noise_level": 67.2,
+    "dominant_source": "traffic",
+    "classification": {
+      "traffic": 0.68,
+      "human": 0.25,
+      "construction": 0.05,
+      "other": 0.02
+    },
+    "who_compliance": {
+      "status": "Exceeds WHO Daytime Limit",
+      "exceeds_limit": true
+    },
+    "weather": "overcast",
+    "confidence": 0.78
+  }
+]

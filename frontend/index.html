@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoSound Analyzer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="header">
+        <h1>🎵 EcoSound Analyzer</h1>
+        <p>AI-Driven Urban Noise Pollution Monitoring & Mapping</p>
+    </div>
+    
+    <div class="container">
+        <div class="controls-panel">
+            <div class="upload-section" id="uploadSection">
+                <div class="upload-icon">🎵</div>
+                <p><strong>Upload Audio File</strong></p>
+                <p>Drop WAV, MP3, or M4A files here</p>
+                <input type="file" id="audioFile" class="file-input" accept=".wav,.mp3,.m4a">
+                <button class="upload-btn" onclick="document.getElementById('audioFile').click()">
+                    Choose File
+                </button>
+            </div>
+
+            <div class="recording-section">
+                <h3>Or Record Live Audio</h3>
+                <button class="record-btn" id="recordBtn" onclick="toggleRecording()">
+                    🎤 Start Recording
+                </button>
+                <div id="recordingStatus"></div>
+            </div>
+
+            <div class="analysis-section">
+                <h3>🔍 Sound Classification</h3>
+                <div id="analysisResults">
+                    <p style="text-align: center; color: #7f8c8d; font-style: italic;">
+                        Upload or record audio to see AI analysis
+                    </p>
+                </div>
+                <div class="noise-level">
+                    <div>Estimated: <span id="noiseLevel">-- dB</span></div>
+                </div>
+                <div class="regulatory-info" id="regulatoryInfo" style="display: none;">
+                    <strong>WHO Assessment:</strong> <span id="whoStatus">--</span>
+                </div>
+                <div class="prediction-panel" id="predictionPanel" style="display: none;">
+                    <h4>🔮 Noise Forecast (Next Hour)</h4>
+                    <div id="predictionResult">--</div>
+                </div>
+                <div class="anomaly-alert" id="anomalyAlert" style="display: none;">
+                    🚨 Anomaly Detected: Unusual sound pattern identified!
+                </div>
+            </div>
+
+            <div class="feedback-section">
+                <h3>📝 Citizen Reporting</h3>
+                <textarea id="feedbackText" placeholder="Describe noise issues, sources, or observations in your area..."></textarea>
+                <button class="upload-btn" onclick="submitFeedback()">Submit Report</button>
+            </div>
+
+            <div id="statusMessages"></div>
+        </div>
+
+        <div class="map-container">
+            <div class="map-header">
+                📍 Real-time Noise Pollution Map
+            </div>
+            <div class="map-controls">
+                <label><input type="checkbox" id="trafficLayer" checked onchange="toggleLayer('traffic')"> 🚗 Traffic</label>
+                <label><input type="checkbox" id="constructionLayer" checked onchange="toggleLayer('construction')"> 🚧 Construction</label>
+                <label><input type="checkbox" id="natureLayer" checked onchange="toggleLayer('nature')"> 🌳 Nature</label>
+                <label><input type="checkbox" id="uncertaintyLayer" onchange="toggleUncertainty()"> 📊 Uncertainty</label>
+            </div>
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <!-- Consent Popup -->
+    <div class="consent-popup" id="consentPopup">
+        <div class="consent-content">
+            <h3>🔒 Privacy & Data Consent</h3>
+            <p>EcoSound Analyzer processes only anonymized audio features (MFCC) and approximate geolocation for noise pollution research. We don't store raw audio files.</p>
+            <p><strong>Your data helps create healthier urban environments!</strong></p>
+            <button class="upload-btn" onclick="acceptConsent()">I Consent & Continue</button>
+            <button class="upload-btn" onclick="declineConsent()" style="background: #95a5a6;">Decline</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/yamnet/dist/yamnet.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/meyda/5.3.0/meyda.min.js"></script>
+    
+    <script type="module" src="js/audio-processor.js"></script>
+    <script type="module" src="js/ml-models.js"></script>
+    <script type="module" src="js/map-handler.js"></script>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
