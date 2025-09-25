@@ -8,6 +8,7 @@ from datetime import datetime
 from routes.audio import audio_bp
 from routes.feedback import feedback_bp
 from routes.prediction import prediction_bp
+from routes.urban_planning import urban_planning_bp
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -17,6 +18,7 @@ CORS(app)  # Enable CORS for frontend communication
 app.register_blueprint(audio_bp, url_prefix='/api/audio')
 app.register_blueprint(feedback_bp, url_prefix='/api/feedback')
 app.register_blueprint(prediction_bp, url_prefix='/api/prediction')
+app.register_blueprint(urban_planning_bp, url_prefix='/api/urban-planning')
 
 # Configuration
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size

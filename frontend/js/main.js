@@ -1,12 +1,12 @@
-// js/main.js - Core application logic and event handlers
+// js/main.js
 
 import { processAudioFile, toggleRecording, submitFeedback, showStatus } from './audio-processor.js';
 import { initializeMap, toggleLayer, toggleUncertainty } from './map-handler.js';
+import { initializeUrbanPlanningMap } from './urban-planning-map.js';
 
 // Global variables
 window.userConsented = false;
 
-// Initialize application when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     showConsentPopup();
     setupEventListeners();
@@ -34,6 +34,26 @@ function initializeApp() {
     setupGeolocation();
 }
 
+function setupViewToggle() {
+    const noiseBtn = document.getElementById('noiseMapBtn');
+    const urbanBtn = document.getElementById('urbanPlanningBtn');
+
+    noiseBtn.addEventListener('click', () => {
+        noiseBtn.classList.add('active');
+        urbanBtn.classList.remove('active');
+        document.getElementById('noiseMapContainer').style.display = '';
+        document.getElementById('urbanPlanningContainer').style.display = 'none';
+    });
+
+    urbanBtn.addEventListener('click', () => {
+        urbanBtn.classList.add('active');
+        noiseBtn.classList.remove('active');
+        document.getElementById('noiseMapContainer').style.display = 'none';
+        document.getElementById('urbanPlanningContainer').style.display = '';
+        initializeUrbanPlanningMap();
+    });
+}
+
 // Setup event listeners for file upload and drag/drop
 function setupEventListeners() {
     const uploadSection = document.getElementById('uploadSection');
@@ -46,6 +66,8 @@ function setupEventListeners() {
 
     // File input change
     audioFile.addEventListener('change', handleFileSelect);
+
+    setupViewToggle();
 }
 
 // Drag and drop handlers

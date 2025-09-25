@@ -54,13 +54,14 @@ EcoSound Analyzer Architecture
 │   ├── UI: HTML/CSS/JS (index.html, styles.css, main.js)
 │   ├── Audio Processing: Web Audio API + Meyda.js (audio-processor.js)
 │   ├── ML Inference: TensorFlow.js + YAMNet (ml-models.js)
-│   └── Mapping: Leaflet.js + Heatmaps (map-handler.js)
+│   ├── Mapping: Leaflet.js + Heatmaps (map-handler.js)
+|   └── Urban Planning: Zone Overlays + Tools (urban-planning-map.js)
 │
 ├── Backend (Flask API)
 │   ├── Server: app.py (CORS, Error Handling)
-│   ├── Routes: /api/audio (classification), /api/feedback (reports), /api/prediction (forecasts)
+│   ├── Routes: /api/audio (classification), /api/feedback (reports), /api/prediction (forecasts), /api/urban_planning (planning)
 │   ├── Models: classifier.py (YAMNet/Sklearn), anomaly_detector.py (Isolation Forest)
-│   └── Utils: audio_features.py (MFCC extraction), db_handler.py (SQLite ops)
+│   └── Utils: audio_features.py (MFCC extraction), db_handler.py (SQLite ops), infrastructure_planner.py, zoning_analysis.py
 │
 ├── Data Flow
 │   ├── Audio Input → Feature Extraction (MFCC) → ML Classification → Map Visualization
